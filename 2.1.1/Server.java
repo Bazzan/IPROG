@@ -9,7 +9,7 @@ public class Server {
     // static ServerSocket serverSocket;
     static ArrayList<ClientThread> clients;
     static ServerSocket serverSocket;
-    static int portNumber = 4444;
+    static int portNumber = 2000;
 
     public static void main(String[] args) {
        serverSocket = null;
@@ -26,7 +26,8 @@ public class Server {
 
     public static void acceptClients() {
         clients = new ArrayList<ClientThread>();
-        
+        System.out.println("acceptClient");
+
         while (true) {
             try {
                 Socket socket = serverSocket.accept();
@@ -34,6 +35,7 @@ public class Server {
                 Thread thread = new Thread(client);
                 thread.start();
                 clients.add(client);
+                System.out.println(client + " added client");
 
             } catch (IOException e) {
                 System.out.println("Accept fail on " + portNumber);

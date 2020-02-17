@@ -11,7 +11,7 @@ public class SocketClient {
         Scanner scan = new Scanner(System.in);
         String name = scan.nextLine();
         scan.close();
-        int portNumber = 4444;
+        int portNumber = 2000;
 
         try {
             socket = new Socket("LocalHost", portNumber);

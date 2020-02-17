@@ -22,16 +22,22 @@ public class ServerThread implements Runnable{
     @Override
     public void run(){
         try{
-            out = new PrintWriter(socket.getOutputStream());
-            serverIn = (new BufferedReader(new InputStreamReader(socket.getInputStream())));
+            out = new PrintWriter(socket.getOutputStream(), true);
+            // serverIn = (new BufferedReader(new InputStreamReader(socket.getInputStream())));
+            serverIn = socket.getInputStream();
             userIn = new BufferedReader(new InputStreamReader(System.in));
-
+            System.out.println("New user " + userIn);
             while(!socket.isClosed()){
+                System.out.println("Waiting for line");
+
                 if(serverIn.ready()){
+                    System.out.println("Waiting for line");
                     String input = serverIn.readLine();
                     if(input != null){
                         System.out.println(input);
                     }
+                }else{
+                    System.out.println(serverIn.ready());
                 }
                 if(userIn.ready()){
                     out.println(name+ " > " + userIn.readLine());

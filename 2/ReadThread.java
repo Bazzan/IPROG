@@ -28,12 +28,14 @@ public class ReadThread extends Thread {
             try {
                 // !this.client.getUserName().equals(client.getUserName())
                 // if(client.getUserName().equals(userName))
+                String response = reader.readLine();
+
                 if (client.getUserName() != null) {
                     System.out.println("[" + client.getUserName() + "]: ");
 
+                }else{
+                    System.out.println(response);
                 }
-                String response = reader.readLine();
-                System.out.println(response);
 
 
             } catch (IOException ex) {
