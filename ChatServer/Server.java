@@ -1,4 +1,4 @@
-package ChatServer;
+
 
 // package ChatServer;
 
@@ -28,7 +28,7 @@ public class Server {
 
             while(true){
                 Socket socket = serverSocket.accept();
-                System.out.println("New user connected");
+                System.out.println("New user connected: -> " + socket.getInetAddress());
                 ClientThread newClient = new ClientThread(socket, this);
                 // Thread newClient = new Thread(newClientThread);
                   

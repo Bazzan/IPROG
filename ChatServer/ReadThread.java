@@ -1,4 +1,3 @@
-package ChatServer;
 
 import java.net.*;
 import java.io.*;
@@ -31,13 +30,15 @@ public class ReadThread extends Thread {
                 // !this.client.getUserName().equals(client.getUserName())
                 // if(client.getUserName().equals(userName))
                 String response = reader.readLine();
+                System.out.println("\n" + response);
 
-                if (client.getClientName() != null) {
-                    System.out.println("[" + client.getClientName() + "]: ");
+                // if (client.getClientName() != null) {
+                //     System.out.println("[" + client.getClientName() + "]: ");
 
-                }else{
-                    System.out.println(response);
-                }
+                // }
+                // else{
+                //     System.out.println(response);
+                // }
 
 
             } catch (IOException ex) {

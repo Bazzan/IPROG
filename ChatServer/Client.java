@@ -1,4 +1,3 @@
-package ChatServer;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -8,7 +7,7 @@ public class Client{
 
 
     private String hostName;
-    static private int port;
+    private int port;
     private String clientName;
 
     public Client(String hostName, int port){
@@ -42,14 +41,26 @@ public class Client{
 
 
     public static void main(String[] args) {
-        if(args.length == 0){
-            port = 2000;
-        }else if(args.length == 1){
-            port = Integer.parseInt(args[1]);
-        }
+        
+        String hostName;
+        int port;
 
-        Client client = new Client("hostName", port);
+        if(args.length == 2) {
+            hostName = args[0];
+            port = Integer.parseInt(args[1]);
+    
+        }else if( args.length == 1){
+            hostName = args[0];
+            port = 2000;
+        }else if(args.length == 0){
+            hostName = "127.0.0.1";
+            port = 2000;
+        }else return;
+
+        Client client = new Client(hostName, port);
         client.runClient();
+
+
     }
 
 

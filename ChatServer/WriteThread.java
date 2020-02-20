@@ -1,4 +1,3 @@
-package ChatServer;
 
 import java.io.*;
 import java.net.*;
@@ -15,8 +14,8 @@ public class WriteThread extends Thread {
 
         try {
             OutputStream output = socket.getOutputStream();
-            writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "ISO-8859-1") , true);
-
+            // writer = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "ISO-8859-1") , true);
+            writer = new PrintWriter(output, true);
         } catch (IOException e) {
             System.out.println(e);
             e.printStackTrace();
