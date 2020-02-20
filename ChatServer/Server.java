@@ -1,15 +1,16 @@
 package ChatServer;
 
-
+// package ChatServer;
 
 import java.net.*;
 import java.util.HashSet;
+import java.util.Set;
 import java.io.*;
 
 public class Server {
     private int port;
     private Set<String> clientNames = new HashSet<>();
-    private Set<UserThread> clientThreads = new HashSet<>();
+    private Set<ClientThread> clientThreads = new HashSet<>();
 
 
     public Server(int port){
@@ -28,8 +29,9 @@ public class Server {
             while(true){
                 Socket socket = serverSocket.accept();
                 System.out.println("New user connected");
-            
                 ClientThread newClient = new ClientThread(socket, this);
+                // Thread newClient = new Thread(newClientThread);
+                  
                 clientThreads.add(newClient);
                 newClient.start();
             
@@ -83,11 +85,11 @@ public void broadcast(String message, ClientThread clientToExclude){
     }
 
     public boolean hasClient(){
-        return !this.userNames.isEmpty();
+        return !this.clientNames.isEmpty();
     }
 
-    public Set<String> getUserNames(){
-        return this.userNames;
+    public Set<String> getClientNames(){
+        return this.clientNames;
     }
 
 

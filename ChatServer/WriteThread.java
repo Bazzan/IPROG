@@ -1,3 +1,5 @@
+package ChatServer;
+
 import java.io.*;
 import java.net.*;
 
@@ -26,7 +28,7 @@ public class WriteThread extends Thread {
         Console console = System.console();
 
         String userName = console.readLine("\nEnter youre username");
-        client.setUserName(userName);
+        client.setClientName(userName);
         writer.println(userName);
 
         String text;

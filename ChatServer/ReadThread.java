@@ -1,3 +1,5 @@
+package ChatServer;
+
 import java.net.*;
 import java.io.*;
 
@@ -30,8 +32,8 @@ public class ReadThread extends Thread {
                 // if(client.getUserName().equals(userName))
                 String response = reader.readLine();
 
-                if (client.getUserName() != null) {
-                    System.out.println("[" + client.getUserName() + "]: ");
+                if (client.getClientName() != null) {
+                    System.out.println("[" + client.getClientName() + "]: ");
 
                 }else{
                     System.out.println(response);

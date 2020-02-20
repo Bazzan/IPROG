@@ -1,12 +1,14 @@
 package ChatServer;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ClientThread implements Runnable {
+public class ClientThread extends Thread implements Runnable {
 
     private Socket socket;
     public Server server;
@@ -27,6 +29,8 @@ public class ClientThread implements Runnable {
             OutputStream output = socket.getOutputStream();
             writer = new PrintWriter(output, true);
 
+            printClients();
+
             String clientName = reader.readLine();
             server.addClientName(clientName);
 
@@ -37,32 +41,37 @@ public class ClientThread implements Runnable {
 
             do{
                 clientMessage = reader.readLine();
-                serverMessage = "["+ clientName+ "]" + clientMessage;
+                serverMessage = "[ "+ clientName+ " ]: " + clientMessage;
                 server.broadcast(serverMessage,this); 
             }while(!clientMessage.equals("exit"));
 
+            server.removeClientFormSet(clientName, this);
+            socket.close();
             
+            serverMessage = clientName + " went away";
+            server.broadcast(serverMessage, this);
             
             
 
 
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (IOException e) {
+            System.out.println(e.getMessage() + " -> error ClientThread");
+            e.printStackTrace();
         }
 
     }
 
     public void printClients() {
-        if (server.hasUser()) {
-            writer.println("connected Clients:" + server.getUserNames());
+        if (server.hasClient()) {
+            writer.println("connected Clients:" + server.getClientNames());
         }else{
             writer.println("No Clients");
         }
     }
 
 
-    public void sendMessage(){
-        writer.println(x);
+    public void sendMessage(String message){
+        writer.println(message);
     }
 
 }
