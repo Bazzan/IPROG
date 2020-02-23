@@ -10,7 +10,7 @@ public class Client{
     private int port;
     private String clientName;
 
-    public Client(String hostName, int port){
+    public Client(/*String hostName*/ int port){
         this.hostName = hostName;
         this.port = port;
     }
@@ -40,24 +40,26 @@ public class Client{
     }
 
 
+
     public static void main(String[] args) {
         
         String hostName;
         int port;
 
-        if(args.length == 2) {
-            hostName = args[0];
-            port = Integer.parseInt(args[1]);
+        // if(args.length == 2) {
+        //     hostName = args[0];
+        //     port = Integer.parseInt(args[1]);
     
-        }else if( args.length == 1){
-            hostName = args[0];
-            port = 2000;
+        // }else 
+        if( args.length == 1){
+            // hostName = args[0];
+            port = Integer.parseInt(args[0]);
         }else if(args.length == 0){
-            hostName = "127.0.0.1";
+            // hostName = "127.0.0.1";
             port = 2000;
         }else return;
 
-        Client client = new Client(hostName, port);
+        Client client = new Client( port);
         client.runClient();
 
 

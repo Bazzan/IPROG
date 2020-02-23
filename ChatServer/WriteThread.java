@@ -38,8 +38,9 @@ public class WriteThread extends Thread {
         }while(!text.equals("bye"));
         
         try{
+            
             socket.close();
-
+            
         } catch (IOException e){
             System.out.println(e);
             e.printStackTrace();

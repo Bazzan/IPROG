@@ -9,7 +9,7 @@ import java.net.Socket;
 
 public class ClientThread extends Thread implements Runnable {
 
-    private Socket socket;
+    public Socket socket;
     public Server server;
     private PrintWriter writer;
 
@@ -34,21 +34,25 @@ public class ClientThread extends Thread implements Runnable {
             server.addClientName(clientName);
 
             String serverMessage = "new client connected " + clientName;
-            server.broadcast(serverMessage, this);
+            server.sendMessageToClients(serverMessage, this);
 
             String clientMessage;
 
             do{
                 clientMessage = reader.readLine();
                 serverMessage = "[ "+ clientName+ " ]: " + clientMessage;
-                server.broadcast(serverMessage,this); 
+                server.sendMessageToClients(serverMessage,this); 
             }while(!clientMessage.equals("exit"));
 
             server.removeClientFormSet(clientName, this);
+            input.close();
+            reader.close();
+            writer.close();
             socket.close();
             
+            
             serverMessage = clientName + " went away";
-            server.broadcast(serverMessage, this);
+            server.sendMessageToClients(serverMessage, this);
             
             
 

@@ -27,15 +27,15 @@ public class Server {
 
 
             while(true){
-                Socket socket = serverSocket.accept();
-                System.out.println("New user connected: -> " + socket.getInetAddress());
-                ClientThread newClient = new ClientThread(socket, this);
-                // Thread newClient = new Thread(newClientThread);
+                Socket clientSocket = serverSocket.accept();
+                System.out.println("New user connected: -> " + clientSocket.getInetAddress());
+                ClientThread newClient = new ClientThread(clientSocket, this);
                   
                 clientThreads.add(newClient);
                 newClient.start();
             
             }
+            
         
         
         } catch (Exception e) {
@@ -67,19 +67,22 @@ public class Server {
 
     }
 
-public void broadcast(String message, ClientThread clientToExclude){
+public synchronized void  sendMessageToClients(String message, ClientThread clientToExclude){
+    System.out.println(clientToExclude.socket.getRemoteSocketAddress() + "> " + message );
+
     for(ClientThread client : clientThreads){
         if( client != clientToExclude){
             client.sendMessage(message);
+
         }
     }
 }
     
 
-    public void addClientName(String clientName){
+    public synchronized void addClientName(String clientName){
         clientNames.add(clientName);
     }
-    public void removeClientFormSet(String clientName, ClientThread client){
+    public synchronized void removeClientFormSet(String clientName, ClientThread client){
         clientNames.remove(client);
         System.out.println("removed " + clientName);
     }

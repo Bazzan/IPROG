@@ -33,13 +33,12 @@ public class ReadThread extends Thread {
                 System.out.println("\n" + response);
 
                 // if (client.getClientName() != null) {
-                //     System.out.println("[" + client.getClientName() + "]: ");
+                // System.out.println("[" + client.getClientName() + "]: ");
 
                 // }
                 // else{
-                //     System.out.println(response);
+                // System.out.println(response);
                 // }
-
 
             } catch (IOException ex) {
                 ex.getMessage();
@@ -47,6 +46,14 @@ public class ReadThread extends Thread {
                 break;
             }
         }
+        try {
+            reader.close();
+            socket.close();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 
 }
