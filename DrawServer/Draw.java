@@ -47,7 +47,7 @@ public class Draw extends JFrame {
 }
 
 class Paper extends JPanel {
-  private HashSet hs = new HashSet();
+  private HashSet<Point> hs = new HashSet<Point>();
   private Draw draw;
 
   public Paper() {
@@ -62,7 +62,7 @@ class Paper extends JPanel {
     Iterator i = hs.iterator();
     while (i.hasNext()) {
       Point p = (Point) i.next();
-      g.fillOval(p.x, p.y, 2, 2);
+      g.fillOval(p.x, p.y, 10, 10);
     }
   }
 
@@ -109,7 +109,7 @@ class Paper extends JPanel {
 
 }
 
-class ReciveThread extends Paper implements Runnable {
+class ReciveThread implements Runnable {
 
   @Override
   public void run() {
@@ -125,12 +125,12 @@ class ReciveThread extends Paper implements Runnable {
         byte[] data = rdp.getData();
         String message = new String(data);
 
-        System.out.println(message);
 
         String[] messageArray = message.split(" ");
         Point p = new Point(Integer.parseInt(messageArray[0]), Integer.parseInt(messageArray[1]));
-        System.out.println("addPoint?");
-        addPoint(p);
+        System.out.println(p.toString());
+
+        Draw.p.addPoint(p);
 
       }
     } catch (Exception e) {
