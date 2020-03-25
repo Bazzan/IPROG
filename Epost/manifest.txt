@@ -1,0 +1,2 @@
+Main-Class: EpostSend
+Class-path: javax.mail.jar activation.jar EpostSend.class

@@ -1,0 +1,7 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "Epost/activation.jar",
+        "Epost/javax.mail.jar"
+    ]
+}
