@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.util.*;
 
 public class Draw extends JFrame {
-  public static Paper p = new Paper();
+  public static PaperComp p = new PaperComp();
   private static int myPort;
   public static int remotePort;
   public static InetAddress address;
